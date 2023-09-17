@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Exemplo de Vídeo com Alerta</title>
+    <style>
+     .video-container {
+       position: relative;
+       max-width: 100%; /* Adicionado para tornar responsivo */
+       height: auto; /* Adicionado para tornar responsivo */
+       margin: auto;
+       /* box-shadow: 0 0px 20px 0 #F4D03F; */
+      }
+    .video-container video {
+      width:100%;
+      height: auto;
+    }
+    .progress-bar {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 6px;
+          background-color: #f28e36;
+          border-radius: 3px;
+          overflow: hidden;
+          transition: width 0.3s ease-in-out;
+    }
+    .progress-bar::before {
+          content: "";
+          display: block;
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          background-color: #0297fa;
+          width: 0%;
+          transition: width 0.3s ease-in-out;
+        }
+    .progress-bar.loaded::before {
+          width: 100%;
+        }
+
+      
+      .video-thumbnail {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        max-width: 100%; /* Adicionado para tornar responsivo */
+        background-image: url('https://s12.gifyu.com/images/gif-vsl2.gif');
+        background-size: cover;
+        background-position: center;
+        margin: auto; 
+      }
+
+
+      .play-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80px;
+        height: px;
+        border: none;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        font-size: 36px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 80px;
+        cursor: pointer;
+        z-index: 1;
+        border: 2px solid #fff;
+        background-color: rgba(241, 88, 45, 0.7);
+        font-size: 24px;
+        font-weight: 700;
+        white-space: normal;
+        line-height: 1.1em;
+      }
+      .button-check {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80px;
+        height: 80px;
+        border: none;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        font-size: 36px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 80px;
+        cursor: pointer;
+        z-index: 1;
+        border: 2px solid #fff;
+        background-color: rgba(241, 88, 45, 0.7);
+        font-size: 24px;
+        font-weight: 700;
+        white-space: normal;
+        line-height: 1.1em;
+      }
+      .video-alert {
+        position: absolute;
+        top: %;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 10px;
+        background-color: rgba(241, 88, 45, 0.7);
+        border: 3px solid #fff;
+        width: 80%;
+        max-width: 300px;
+        padding: 0.5em;
+        text-align: center;
+        color: #fff;
+        font-size: 24px;
+        font-weight: 700;
+        white-space: normal;
+        line-height: 1.1em;
+        z-index: 1;
+      }
+    </style>
+  </head>
+  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <body>
+    <div class="video-container">
+      <div class="video-thumbnail"></div>
+      <div class="play-button.video-alert">
+      <div class="progress-bar" id="progress-bar"></div>
+      
+      <!-- <button class="play-button">O vídeo já vai começar no mesmo elemento</button> -->
+      <video id="myVideo" width="820" height="465" >
+        <source src="C:\Users\Lenovo\Documents\Pessoal\test.mp4" type="video/mp4">
+      </video>
+    </div>
+    
+     <!-- <div class="video-alert" style="display: none;">O vídeo atingiu 40 segundos de reprodução!</div> -->
+     
+     <button class="play-button video-alert">&#9658; <center>Seu vídeo já começou!</center> <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="46.75px" height="32.563px" viewBox="7.999 9.062 46.75 32.563" enable-background="new 7.999 9.062 46.75 32.563" xml:space="preserve"><style>@-webkit-keyframes BLINK {0% { opacity: 0; }33% { opacity: 1; }66% { opacity: 1; }100% { opacity: 0; }}@keyframes BLINK {0% { opacity: 0; }33% { opacity: 1; }66% { opacity: 1; }100% { opacity: 0; }}#smartplayer#smartplayer#smartplayer .blink_1 {-webkit-animation: BLINK 2s infinite;animation: BLINK 2s infinite;opacity: 0;}#smartplayer#smartplayer#smartplayer .blink_2 {-webkit-animation: BLINK 2s infinite .3s;animation: BLINK 2s infinite .3s;opacity: 0;}#smartplayer#smartplayer#smartplayer .blink_3 {-webkit-animation: BLINK 2s infinite .6s;animation: BLINK 2s infinite .6s;opacity: 0;}#smartplayer#smartplayer#smartplayer .smartplay-svg-color {fill: #FFFFFF !important;}#smartplayer#smartplayer#smartplayer .adjustable {border: 4px solid red;}</style><g class="adjustable fg"><path class="smartplay-svg-color" d="M53.249,39.616c-0.186,0-0.371-0.051-0.537-0.157l-43.5-27.75c-0.466-0.297-0.603-0.916-0.306-1.381c0.298-0.466,0.917-0.601,1.381-0.306l43.5,27.75c0.467,0.297,0.604,0.916,0.307,1.381C53.901,39.453,53.579,39.616,53.249,39.616z"></path><path class="blink_3 smartplay-svg-color" d="M48.896,33.467l1.699,1.085c3.497-7.791,2.073-17.271-4.313-23.659c-0.391-0.391-1.023-0.391-1.414,0s-0.391,1.023,0,1.414C50.581,18.019,51.913,26.463,48.896,33.467z"></path><path class="blink_3 smartplay-svg-color" d="M46.926,36.956c-0.612,0.863-1.286,1.695-2.059,2.469c-0.392,0.391-0.392,1.023,0,1.414c0.194,0.195,0.45,0.293,0.707,0.293c0.256,0,0.512-0.098,0.706-0.293c0.878-0.878,1.642-1.824,2.333-2.807L46.926,36.956z"></path><path class="blink_2 smartplay-svg-color" d="M42.543,29.415l1.777,1.135c1.545-5.315,0.229-11.293-3.953-15.476c-0.392-0.391-1.023-0.391-1.414,0c-0.392,0.391-0.392,1.023,0,1.414C42.454,19.987,43.639,24.925,42.543,29.415z"></path><path class="blink_2 smartplay-svg-color" d="M41,33.174c-0.563,0.94-1.235,1.837-2.047,2.646c-0.391,0.392-0.391,1.023,0,1.414c0.195,0.195,0.451,0.293,0.707,0.293s0.512-0.098,0.707-0.293c0.916-0.914,1.676-1.924,2.317-2.984L41,33.174z"></path><path class="blink_1 smartplay-svg-color" d="M35.771,25.094l2.003,1.277c0.012-0.203,0.029-0.404,0.029-0.609c0-3.079-1.2-5.974-3.381-8.153c-0.391-0.391-1.022-0.391-1.414,0c-0.391,0.391-0.391,1.023,0,1.414C34.652,20.666,35.613,22.802,35.771,25.094z"></path><path class="blink_1 smartplay-svg-color" d="M35.084,29.401c-0.474,1.145-1.172,2.197-2.076,3.1c-0.391,0.391-0.391,1.023,0,1.414c0.195,0.195,0.451,0.293,0.707,0.293c0.257,0,0.513-0.098,0.707-0.293c1.008-1.006,1.795-2.17,2.361-3.43L35.084,29.401z"></path><polygon class="smartplay-svg-color" points="28.124,20.215 28.124,14.991 24.635,17.99  "></polygon><path class="smartplay-svg-color" d="M20.921,20.366h-6.423c-0.553,0-1,0.508-1,1.135v8.229c0,0.627,0.447,1.135,1,1.135h7.375l6.25,5.875V24.96L20.921,20.366z"></path></g></svg> <center>Clique para ouvir</center></button>
+
+    <button class="button-check video-alert" id="meuBotao">Oração poderosa, para você mudar de vida! </button>
+
+
+    <script>
+
+
+
+  //const myVideo = document.getElementById('myVideo');
+  const playButton = document.querySelector('.play-button');
+  const videoThumbnail = document.querySelector('.video-thumbnail');
+  const videoAlert = document.querySelector('.video-alert');
+
+
+ 
+
+  playButton.addEventListener('click', () => {
+    myVideo.play();
+    playButton.style.display = 'none';
+    videoThumbnail.style.display = 'none';
+  });
+
+</script>
+
+<script>
+
+  // Função para mostrar elementos após 30 segundos
+  function mostrarElementos() {
+    const myVideo = document.getElementById('myVideo');
+
+
+    // Esconda os elementos iniciais
+    $("#elemento1, #elemento2").hide();
+
+    myVideo.addEventListener('timeupdate', () => {
+      if (myVideo.currentTime >= 30) {
+        $("#elemento1, #elemento2").show();
+        //alert("este é um alerta simples");
+      }// Segundos para aparecer o elemento depois do play de vídeo
+    });
+  }
+
+  // Aguarde o carregamento completo da página
+  $(document).ready(function () {
+    // Chame a função para mostrar elementos após o carregamento
+    mostrarElementos();
+  });
+
+</script>
+        <!-- PROGRESS-BAR A BAIXO :(  xz ) -->
+<script>
+        const video = document.getElementById('myVideo');
+        const progressBar = document.getElementById('progress-bar');
+
+        // Atualiza a barra de progresso à medida que o vídeo é reproduzido
+        video.addEventListener('timeupdate', () => {
+            const currentTime = video.currentTime;
+            const duration = video.duration;
+            const progressPercentage = (currentTime / duration) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+        });
+</script>
+
+
+
+
+</body>
+<!-- videoAlert.style.display = 'none'; -->
+
+<video-js id="_00cf9e06c8a5526ef30a6d0cd9975c20" fluid="true" primaryColor="#4adede" muted="true" autoplay sA="atomiSA" sP="true" playsinline>
+  <source src="https://customer-ktizn7oxzt125hs7.cloudflarestream.com/00cf9e06c8a5526ef30a6d0cd9975c20/manifest/video.m3u8" type="application/x-mpegURL" />
+</video-js>
+<script type="text/javascript">
+  document.head.appendChild(Object.assign(document.createElement("script"), {
+    src: "https://cdn.atomicatpages.com/s2.js?id=_00cf9e06c8a5526ef30a6d0cd9975c20&cache=" + Math.floor((Math.random() * 100000)),
+    async: true
+  }));
+
+  // Função para exibir um alert quando o vídeo atingir 10 segundos
+  document.getElementById("_00cf9e06c8a5526ef30a6d0cd9975c20").addEventListener("timeupdate", function() {
+    var video = this;
+    if (video.currentTime >= 10) {
+      alert("O vídeo atingiu 10 segundos!");
+      // Você pode remover o ouvinte de eventos após exibir o alerta, se desejar
+      video.removeEventListener("timeupdate", arguments.callee);
+    }
+  });
+</script>
+
+</html>
+
+
